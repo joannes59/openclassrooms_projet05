@@ -23,9 +23,9 @@ Démonstration d'un Proof of Concept (POC)
 
 ```bash
 
-git clone https://github.com/joannes59/oc_projet05.git
+git clone https://github.com/joannes59/openclassrooms_projet05.git
 
-cd oc_projet05
+cd openclassrooms
 pip install -r requirements.txt
 
 ```
@@ -47,6 +47,7 @@ docker run -p 7860:7860 docker_projet05
 ```
 
 ## 📁 Structure du projet
+
 Voir l'arborescence dans la documentation.
 
 ## 🧪 Tests
