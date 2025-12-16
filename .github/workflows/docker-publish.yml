@@ -1,0 +1,32 @@
+name: Deploy to HuggingFace Space
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout GitHub repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Push to Hugging Face
+
+        run: |
+          sudo apt update
+          sudo apt install -y git-lfs
+          git lfs install
+          pip install -U huggingface_hub
+          
+          git config --global user.email "github-actions@github.com"
+          git config --global user.name "GitHub Actions"
+          git clone https://github.com/joannes59/openclassrooms_projet05.git
+          
+          cd openclassrooms_projet05
+          git remote add hf https://joannes59:${{secrets.HF_TOKEN}}@huggingface.co/spaces/joannes59/openclassrooms_projets05
+          git push hf main --force
+          
