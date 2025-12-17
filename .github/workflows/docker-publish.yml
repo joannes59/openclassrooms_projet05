@@ -16,6 +16,11 @@ jobs:
 
       - name: Push to Hugging Face
 
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          HF_USER: ${{ secrets.HF_USER }}
+          HF_MAIL: ${{ secrets.HF_MAIL }}
+      
         run: |
           sudo apt update
           sudo apt install -y git-lfs
@@ -23,11 +28,11 @@ jobs:
           pip install -U huggingface_hub
           pip install hf_xet
           
-          git config --global user.email ${{secrets.HF_MAIL}}
-          git config --global user.name ${{secrets.HF_USER}}
-          git clone https://github.com/${{secrets.HF_USER}}/openclassrooms_projet05.git
+          git config --global user.email $HF_MAIL
+          git config --global user.name $HF_USER
+          git clone https://github.com/$HF_USER/openclassrooms_projet05.git
           
           cd openclassrooms_projet05
-          git remote add hf https://${{secrets.HF_USER}}:${{secrets.HF_TOKEN}}@huggingface.co/spaces/${{secrets.HF_USER}}/openclassrooms_projets05
+          git remote add hf https://$HF_USER:$HF_TOKEN@huggingface.co/spaces/$HF_USER/openclassrooms_projets05
           git push hf main --force
           
