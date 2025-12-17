@@ -29,11 +29,6 @@ jobs:
           pip install -U huggingface_hub
           pip install hf_xet
 
-          echo '---------check depot -----------------'          
-          ls -la
-          git status
-          git branch
-          echo '--------------------------'
           git config --global user.email $HF_MAIL
           git config --global user.name $HF_USER
           
