@@ -1,5 +1,6 @@
 from app import preprocess
 from app import utils
+from app import db_log
 
 # -----------------------------------------------------
 # Chargement du modèle
@@ -18,6 +19,9 @@ def predict(data):
 
     if model is None:
         return {"error": "Modèle non chargé"}
+    
+    # log the data in postgres db
+    db_obj_id = db_log.log_input_data(data)
     
     # encodage
     X = preprocess.encode(data)
