@@ -21,6 +21,7 @@ jobs:
           sudo apt install -y git-lfs
           git lfs install
           pip install -U huggingface_hub
+          pip install hf_xet
           
           git config --global user.email "github-actions@github.com"
           git config --global user.name "GitHub Actions"
