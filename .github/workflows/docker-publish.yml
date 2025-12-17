@@ -23,11 +23,11 @@ jobs:
           pip install -U huggingface_hub
           pip install hf_xet
           
-          git config --global user.email "github-actions@github.com"
-          git config --global user.name "GitHub Actions"
-          git clone https://github.com/joannes59/openclassrooms_projet05.git
+          git config --global user.email ${{secrets.HF_MAIL}}
+          git config --global user.name ${{secrets.HF_USER}}
+          git clone https://github.com/${{secrets.HF_USER}}/openclassrooms_projet05.git
           
           cd openclassrooms_projet05
-          git remote add hf https://joannes59:${{secrets.HF_TOKEN}}@huggingface.co/spaces/joannes59/openclassrooms_projets05
+          git remote add hf https://${{secrets.HF_USER}}:${{secrets.HF_TOKEN}}@huggingface.co/spaces/${{secrets.HF_USER}}/openclassrooms_projets05
           git push hf main --force
           
