@@ -12,6 +12,8 @@ scaler = utils.load_model("scaler.joblib")
 
 def test_load_encoder():
     """ check the configuration model load """
+    encoder = utils.load_model("onehotencoder.joblib")
+    scaler = utils.load_model("scaler.joblib")
     assert encoder and scaler
 
 @pytest.fixture

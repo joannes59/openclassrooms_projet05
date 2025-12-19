@@ -21,10 +21,10 @@ def test_load_model():
     for file_name in model_files:
         assert os.path.exists(file_name)
         
+    model = utils.load_model("model.joblib")
+        
     assert model
         
-    # schemas.InputData.model_fields.items():
-
         
 @pytest.fixture
 def data_example():
