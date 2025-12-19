@@ -21,12 +21,12 @@ DATABASE_URL = os.getenv("DATABASE_URL")
 # Vérification de la connection à la base de données
 # -----------------------------------------------------
 engine = None
-SessionLocal = None
+DBsession = None
 
 if DATABASE_URL:
     try:
         engine = create_engine(DATABASE_URL, echo=False)
-        SessionLocal = sessionmaker(bind=engine)
+        DBsession = sessionmaker(bind=engine)
         print(f"Base de données: \n {DATABASE_URL}")
     except Exception as e:
         print(f"Base de données indisponible : {e}")
@@ -115,7 +115,7 @@ def log_input_data(input_data):
     
     if test_connection(engine):
         
-        db = SessionLocal()
+        db = DBsession()
         db_obj = DBInputData(**input_data.model_dump())
         
         db.add(db_obj)
@@ -133,7 +133,7 @@ def log_output_data(output_data: dict):
     
     if test_connection(engine):
         
-        db = SessionLocal()
+        db = DBsession()
         db_obj = DBOutputData(**output_data)
 
         db.add(db_obj)
