@@ -1,11 +1,18 @@
 # -*- coding: utf-8 -*-
 
 
-
+from app import utils
 from app import schemas
 from app import preprocess
 import pytest
 import json
+
+encoder = utils.load_model("onehotencoder.joblib")
+scaler = utils.load_model("scaler.joblib")
+
+def test_load_encoder():
+    """ check the configuration model load """
+    assert encoder and scaler
 
 @pytest.fixture
 def data_example():
@@ -17,11 +24,9 @@ def data_example():
     data = schemas.InputData(**data_dict)
     return data
 
-
 def test_encode(data_example):
     """ check the response of encode data """
-    x_exemple_scaled = preprocess.encode(data_example)
+    if encoder and scaler:
+        x_exemple_scaled = preprocess.encode(data_example)
     
-    
-    print('exemple preprocess', x_exemple_scaled)
     
