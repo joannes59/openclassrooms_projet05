@@ -6,18 +6,48 @@
 from sqlalchemy import create_engine, Column, Integer, String, DateTime, Float
 from sqlalchemy.orm import sessionmaker, declarative_base
 from sqlalchemy.sql import func
+import os
 
 
 # createuser --createdb --username postgres --no-createrole --pwprompt openclassrooms
 # createdb -O openclassrooms openclassrooms
-DATABASE_URL = "postgresql+psycopg2://openclassrooms:openclassrooms@localhost:5432/openclassrooms"
+# EXPORT DATABASE_URL="postgresql+psycopg2://openclassrooms:openclassrooms@localhost:5432/openclassrooms"
 
-engine = create_engine(DATABASE_URL, echo=False)
+# Récupératin de la variable d'envirronnement de connection à la base de donnée
+DATABASE_URL = os.getenv("DATABASE_URL")
 
-SessionLocal = sessionmaker(bind=engine)
+
+# -----------------------------------------------------
+# Vérification de la connection à la base de données
+# -----------------------------------------------------
+engine = None
+SessionLocal = None
+
+if DATABASE_URL:
+    try:
+        engine = create_engine(DATABASE_URL, echo=False)
+        SessionLocal = sessionmaker(bind=engine)
+        print(f"Base de données: \n {DATABASE_URL}")
+    except Exception as e:
+        print(f"Base de données indisponible : {e}")
+
+def test_connection(engine):
+    """ Check the connection to db """
+    if not engine:
+        return False
+    
+    try:
+        with engine.connect() as conn:
+            return True
+    except:
+        return False
+
+
+# -----------------------------------------------------
+# Définition des tables
+# -----------------------------------------------------
 
 Base = declarative_base()
-
 
 class DBInputData(Base):
     __tablename__ = "db_input_data"
@@ -67,15 +97,19 @@ class DBOutputData(Base):
     probabilite =  Column(Float)
     
     
-def test_connection(engine):
-    try:
-        with engine.connect() as conn:
-            return True
-    except:
-        return False
+# -----------------------------------------------------
+# Création des tables
+# -----------------------------------------------------
+if test_connection(engine):
+    Base.metadata.create_all(bind=engine)
     
+    
+# -----------------------------------------------------
+# Fonctions d'enregistrement des log
+# -----------------------------------------------------
     
 def log_input_data(input_data):
+    """ Enregistrement des données d'entrée au format pydantic """
     
     db_input_id = None
     
@@ -92,6 +126,7 @@ def log_input_data(input_data):
     return db_input_id
 
 def log_output_data(output_data: dict):
+    """ Enregistrement des données de sortie au format dictionnaire """
     
     db_output_id = None
     
@@ -108,5 +143,3 @@ def log_output_data(output_data: dict):
 
     return db_output_id
 
-
-Base.metadata.create_all(bind=engine)
