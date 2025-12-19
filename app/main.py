@@ -25,7 +25,7 @@ InputData = schemas.InputData
 
 @app.get("/")
 def home():
-    """ welcome message """
+    """ Welcome message """
     return prediction.home()
 
 @app.post("/predict")

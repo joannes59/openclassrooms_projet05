@@ -67,22 +67,46 @@ class DBOutputData(Base):
     probabilite =  Column(Float)
     
     
+def test_connection(engine):
+    try:
+        with engine.connect() as conn:
+            return True
+    except:
+        return False
+    
     
 def log_input_data(input_data):
     
-    db_obj_id = None
+    db_input_id = None
     
-    if SessionLocal:
+    if test_connection(engine):
         
-        db_obj = DBInputData(**input_data.model_dump())
         db = SessionLocal()
+        db_obj = DBInputData(**input_data.model_dump())
+        
         db.add(db_obj)
         db.commit()
         db.refresh(db_obj)
-        db_obj_id = db_obj.id
-        print('------db_obj_id-------',db_obj_id )
+        db_input_id = db_obj.id
 
+    return db_input_id
 
-    return db_obj
+def log_output_data(output_data: dict):
+    
+    db_output_id = None
+    
+    
+    if test_connection(engine):
+        
+        db = SessionLocal()
+        db_obj = DBOutputData(**output_data)
+
+        db.add(db_obj)
+        db.commit()
+        db.refresh(db_obj)
+        db_output_id = db_obj.id
+
+    return db_output_id
+
 
 Base.metadata.create_all(bind=engine)

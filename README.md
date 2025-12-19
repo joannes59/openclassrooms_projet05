@@ -25,18 +25,24 @@ Démonstration d'un Proof of Concept (POC)
 
 git clone https://github.com/joannes59/openclassrooms_projet05.git
 
-cd openclassrooms
+cd openclassrooms_projet05
 pip install -r requirements.txt
+
+
 
 ```
 
 ## ▶️ Utilisation
+
+Dans le cadre d'une utilisation sur la plate forme Hugging, le port exposé est définit sur 7860.
+
 ```bash
 uvicorn app.main:app --host 0.0.0.0 --port 7860
 
 ```
 
 ## ▶️ Docker
+
 ```bash
 
 docker build -t docker_projet05 .
