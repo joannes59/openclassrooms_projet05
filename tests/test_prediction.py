@@ -23,7 +23,7 @@ def test_load_model():
         
     model = utils.load_model("model.joblib")
         
-    assert model
+    assert model is not None
         
         
 @pytest.fixture

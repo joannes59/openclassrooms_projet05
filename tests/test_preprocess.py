@@ -14,7 +14,9 @@ def test_load_encoder():
     """ check the configuration model load """
     encoder = utils.load_model("onehotencoder.joblib")
     scaler = utils.load_model("scaler.joblib")
-    assert encoder and scaler
+
+    assert encoder is not None
+    assert scaler is not None
 
 @pytest.fixture
 def data_example():
@@ -28,6 +30,8 @@ def data_example():
 
 def test_encode(data_example):
     """ check the response of encode data """
+    encoder = utils.load_model("onehotencoder.joblib")
+    scaler = utils.load_model("scaler.joblib")
     if encoder and scaler:
         x_exemple_scaled = preprocess.encode(data_example)
     
