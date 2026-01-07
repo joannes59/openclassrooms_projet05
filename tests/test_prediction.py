@@ -11,13 +11,14 @@ import pytest
 import json
 
 model_files = ['model/model.joblib', 'model/onehotencoder.joblib', 'model/scaler.joblib']
-model = utils.load_model("model.joblib")
+
 
 def test_load_model():
     """ Check if model files exist """
     for file_name in model_files:
         assert os.path.exists(file_name)
-    
+        
+    model = utils.load_model("model.joblib")
     assert model is not None
         
         
