@@ -29,6 +29,12 @@ jobs:
         pip install pytest
         pip install -r requirements.txt
         
+    - name: Install Git LFS
+      run: git lfs install
+
+    - name: Fetch LFS objects
+      run: git lfs pull
+      
     - name: Test with pytest
       run: |
         pytest -s
