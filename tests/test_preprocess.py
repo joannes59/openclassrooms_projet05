@@ -8,6 +8,9 @@ import pytest
 import json
 
 
+encoder = utils.load_model("onehotencoder.joblib")
+scaler = utils.load_model("scaler.joblib")
+
 
 @pytest.fixture
 def data_example():
