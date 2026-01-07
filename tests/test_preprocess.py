@@ -19,6 +19,7 @@ def data_example():
     data = schemas.InputData(**data_dict)
     return data
 
+
 def test_encode(data_example):
     """ check the response of encode data """
     x_exemple_scaled = preprocess.encode(data_example)
