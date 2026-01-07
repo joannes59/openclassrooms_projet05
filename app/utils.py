@@ -1,18 +1,14 @@
 import joblib
 import os
+from pathlib import Path
 
 def load_model(file_name):
     """
     Charge le modèle Machine Learning depuis le dossier /model.
     Retourne le modèle chargé ou None en cas d'erreur.
     """
-    docker_root = '/code'
-    if os.path.exists(docker_root):
-        root_code = docker_root
-    else:
-        root_code = os.path.dirname(__file__) + '/..'
-        
-    model_path = os.path.join(root_code, "model", file_name)
+    project_root = Path(__file__).resolve().parents[1]
+    model_path = os.path.join(project_root, "model", file_name)
 
     try:
         model = joblib.load(model_path)
