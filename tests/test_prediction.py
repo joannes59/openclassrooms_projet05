@@ -13,7 +13,6 @@ import pytest
 import json
 
 model_files = ['model/model.joblib', 'model/onehotencoder.joblib', 'model/scaler.joblib']
-model = utils.load_model("model.joblib")
 
 
 def test_load_model():

@@ -33,9 +33,10 @@ def home():
 @app.post("/predict")
 def predict(data: InputData):
     """ 
+    input: voir détail dans le fichier schemas.py
     
-    return :  {"prediction": integer, 
+    return:  {"prediction": integer, 
                "probabilite": float
-               }
+              }
     """
     return prediction.predict(data)

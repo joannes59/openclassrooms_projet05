@@ -31,7 +31,7 @@ def predict(data):
     y_proba = model.predict_proba(X)
     
     # format reponse
-    response = {"prediction": int(y), "probabilite": float(y_proba[0][1])}
+    response = {"prediction": int(y[0]), "probabilite": float(y_proba[0][1])}
     
     # log the response in postgres db
     if db_input_id:

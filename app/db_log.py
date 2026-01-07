@@ -13,7 +13,7 @@ import os
 # createdb -O openclassrooms openclassrooms
 # EXPORT DATABASE_URL="postgresql+psycopg2://openclassrooms:openclassrooms@localhost:5432/openclassrooms"
 
-# Récupératin de la variable d'envirronnement de connection à la base de donnée
+# Récupération de la variable d'envirronnement de connection à la base de donnée
 DATABASE_URL = os.getenv("DATABASE_URL")
 
 
