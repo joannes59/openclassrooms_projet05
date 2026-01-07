@@ -5,7 +5,9 @@ from app import prediction
 
 # -----------------------------------------------------
 # Initialisation de l'application
-# Local test: uvicorn app.main:app --host 0.0.0.0 --port 7860
+# Local test: 
+# export DATABASE_URL="postgresql+psycopg2://openclassrooms:openclassrooms@localhost:5432/openclassrooms"
+# uvicorn app.main:app --host 0.0.0.0 --port 7860
 # -----------------------------------------------------
 app = FastAPI(
     title="API Machine Learning - Openclassrooms Projet 05",
@@ -25,15 +27,16 @@ InputData = schemas.InputData
 
 @app.get("/")
 def home():
-    """ welcome message """
+    """ Welcome message """
     return prediction.home()
 
 @app.post("/predict")
 def predict(data: InputData):
     """ 
+    input: voir détail dans le fichier schemas.py
     
-    return :  {"prediction": integer, 
+    return:  {"prediction": integer, 
                "probabilite": float
-               }
+              }
     """
     return prediction.predict(data)

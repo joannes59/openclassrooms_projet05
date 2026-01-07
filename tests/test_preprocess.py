@@ -1,11 +1,16 @@
 # -*- coding: utf-8 -*-
 
 
-
+from app import utils
 from app import schemas
 from app import preprocess
 import pytest
 import json
+
+
+encoder = utils.load_model("onehotencoder.joblib")
+scaler = utils.load_model("scaler.joblib")
+
 
 @pytest.fixture
 def data_example():
@@ -21,7 +26,6 @@ def data_example():
 def test_encode(data_example):
     """ check the response of encode data """
     x_exemple_scaled = preprocess.encode(data_example)
-    
-    
-    print('exemple preprocess', x_exemple_scaled)
+        
+
     

@@ -23,11 +23,8 @@ def encode(data):
     df = pd.DataFrame([data_dict])
     
     # Catégorisation des colonnes, le type permet de les classer en numérique ou en catégorie
-    index_columns = ['id_employee']
-    target_columns = ['a_quitte_l_entreprise']
     categorical_columns = df.select_dtypes(include='object').columns.tolist()
-    numerical_columns = list(set(df.columns) - set(categorical_columns))
-    
+
     # Créer un DataFrame avec les colonnes catégories nominales encodées
     X_encoded_data = encoder.transform(df[categorical_columns])
     X_encoded_data_df = pd.DataFrame(X_encoded_data, columns=encoder.get_feature_names_out(categorical_columns),
