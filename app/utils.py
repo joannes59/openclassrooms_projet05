@@ -15,5 +15,5 @@ def load_model(file_name):
         return model
 
     except Exception as e:
-        raise ValueError(f"model_path: {model_path}\nproject_root:{project_root}_n{e}")
+        raise ValueError(f"model_path: {model_path}\nproject_root:{project_root}\n{e}")
         
