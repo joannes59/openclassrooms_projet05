@@ -8,7 +8,7 @@ def load_model(file_name):
     Retourne le modèle chargé ou raise en cas d'erreur.
     """
     project_root = Path.cwd()      
-    model_path = os.path.join(project_root, "model", file_name)
+    model_path = str(project_root) + "/model/" + file_name
 
     try:
         model = joblib.load(model_path)
