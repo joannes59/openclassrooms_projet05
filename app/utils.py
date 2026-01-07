@@ -8,8 +8,6 @@ def load_model(file_name):
     """
 
     model_path = os.path.join(
-        os.path.dirname(__file__),
-        "..",
         "model",
         file_name
     )
