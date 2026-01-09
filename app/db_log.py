@@ -19,6 +19,7 @@ DATABASE_URL = os.getenv("DATABASE_URL")
 
 # -----------------------------------------------------
 # Vérification de la connection à la base de données
+# la base de donnée n'est pas disponible sur HuggingFace
 # -----------------------------------------------------
 engine = None
 DBsession = None
